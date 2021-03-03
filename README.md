@@ -1,6 +1,6 @@
-# SlashSenpai
+# 出刀前輩 (Slash Senpai)
 
-!(image)[https://imgur.com/a/FY6Ciq9.jpg]
+![Imgur](http://i.imgur.com/FY6Ciq9.jpg)
 
 https://clips.twitch.tv/TastyCovertGuanacoKreygasm-a9rZtGVmspKJ4Zgy
   
@@ -14,9 +14,9 @@ https://clips.twitch.tv/TastyCovertGuanacoKreygasm-a9rZtGVmspKJ4Zgy
 ## 原改造版
 
 Mega Man X2 Zero Playable  
-https://www.romhacking.net/hacks/4988/  
+https://www.romhacking.net/hacks/4988  
 Mega Man X2 Zero Playable (Graphic and Text Fix)  
-https://www.romhacking.net/hacks/5070/  
+https://www.romhacking.net/hacks/5070  
   
 Mega Man X3 Zero Project 4.1  
-https://www.romhacking.net/hacks/4086/
+https://www.romhacking.net/hacks/4086
