@@ -1,6 +1,6 @@
 # 出刀前輩 (Slash Senpai)
 
-![Imgur](http://i.imgur.com/a/FY6Ciq9.jpg)
+![Imgur](https://i.imgur.com/KsmGpk8.jpeg)
 
 https://clips.twitch.tv/TastyCovertGuanacoKreygasm-a9rZtGVmspKJ4Zgy
   
@@ -24,4 +24,4 @@ https://www.romhacking.net/hacks/4086
 
 ## 模擬器
 
-BizHawk
+使用 BizHawk 並搭配相對應的 Lua 檔案
