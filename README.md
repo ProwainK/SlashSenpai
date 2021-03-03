@@ -1,6 +1,6 @@
 # 出刀前輩 (Slash Senpai)
 
-![Imgur](http://i.imgur.com/FY6Ciq9.jpg)
+![Imgur](http://i.imgur.com/a/FY6Ciq9.jpg)
 
 https://clips.twitch.tv/TastyCovertGuanacoKreygasm-a9rZtGVmspKJ4Zgy
   
@@ -20,3 +20,8 @@ https://www.romhacking.net/hacks/5070
   
 Mega Man X3 Zero Project 4.1  
 https://www.romhacking.net/hacks/4086
+
+
+## 模擬器
+
+BizHawk
