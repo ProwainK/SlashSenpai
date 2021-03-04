@@ -11,17 +11,24 @@ https://clips.twitch.tv/TastyCovertGuanacoKreygasm-a9rZtGVmspKJ4Zgy
 換血的時候請多加注意。
 
 
-## 原改造版
+## 改造版 / Romhack
+
+### X2
 
 Mega Man X2 Zero Playable  
 https://www.romhacking.net/hacks/4988  
 Mega Man X2 Zero Playable (Graphic and Text Fix)  
 https://www.romhacking.net/hacks/5070  
-  
+
+### X3
+
 Mega Man X3 Zero Project 4.1  
 https://www.romhacking.net/hacks/4086
 
 
 ## 模擬器
 
-使用 BizHawk 並搭配相對應的 Lua 檔案
+使用 BizHawk 打開遊戲，  
+選單 Tools -> Lua Console，  
+Lua 小視窗的 Script -> Open Script，  
+選擇相對應的 Lua 檔案即可開始遊戲。
