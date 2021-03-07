@@ -20,6 +20,14 @@ https://www.romhacking.net/hacks/4988
 Mega Man X2 Zero Playable (Graphic and Text Fix)  
 https://www.romhacking.net/hacks/5070  
 
+### X2 Zero Air Dash
+
+原版 / Original  
+Mega Man X2 (USA)  
+No-Intro: Super Nintendo Entertainment System (v. 20180813-062835)  
+SHA-1: 637079014421563283CDED6AEAA0604597B2E33C  
+CRC32: 947B0355
+
 ### X3
 
 Mega Man X3 Zero Project 4.1  
