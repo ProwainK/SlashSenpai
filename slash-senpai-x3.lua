@@ -13,14 +13,17 @@ function slash_senpai()
     end
   end
 
-  -- 使用學弟
+  -- 使用學弟 & 可出刀
   if memory.read_u8(0x000A8E) == 0 then
-   -- 非騎乘狀態 & 可出刀
-   if memory.read_u8(0x0009F9) == 180 and memory.read_u8(0x001FB2) == 252 then
-     memory.write_u8(0x000A8F, 252)
-   else
-     memory.write_u8(0x000A8F, 0)
-   end
+    -- 可出刀
+    if memory.read_u8(0x001FB2) == 128 or memory.read_u8(0x001FB2) == 252 then
+      -- 非騎乘狀態
+      if memory.read_u8(0x0009F9) == 180 then
+        memory.write_u8(0x000A8F, 252)
+      else
+        memory.write_u8(0x000A8F, 0)
+      end
+    end
   end
 
 end
