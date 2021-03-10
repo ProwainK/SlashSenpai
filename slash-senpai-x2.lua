@@ -34,6 +34,11 @@ function double_jump()
     jump_count = 0
   end
 
+  -- 貼牆
+  if memory.read_u8(0x000A05) == 59 then
+    jump_count = 0
+  end
+
   -- 跳躍次數結算
   if jump_count > 1 then
     memory.write_u8(0x000A14, 0)
@@ -51,10 +56,17 @@ end
 -- 出刀動畫加速
 function slash_boost()
 
-  -- 地上斬 / 空中斬
+  slash_speed = 10
+
+  -- 昇龍拳已解鎖
+  if memory.read_u8(0x001FB1) == 128 then
+    slash_speed = 1
+  end
+
+  -- 地上斬 76 / 空中斬 80
   if memory.read_u8(0x0009DA) == 76 or memory.read_u8(0x0009DA) == 80 then
-    if memory.read_u8(0x0009EB) > 1 then
-      memory.write_u8(0x0009EB, 1)
+    if memory.read_u8(0x0009EB) > slash_speed then
+      memory.write_u8(0x0009EB, slash_speed)
     end
   end
 
