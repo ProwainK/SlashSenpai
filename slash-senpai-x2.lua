@@ -1,6 +1,16 @@
 -- Slash Senpai X2
 
 --------------------------------------------------
+-- 手動選項
+-- 修改後面的 true 或 false，true 為開啟，false 為關閉
+
+-- 二段跳
+is_double_jump = true
+
+-- 一擊死模式
+is_one_hit_ko = false
+
+--------------------------------------------------
 -- for Bizhawk
 
 memory.usememorydomain("WRAM")
@@ -23,14 +33,17 @@ end
 --------------------------------------------------
 -- 出刀動畫加速
 
-function slash_boost()
+-- 預設出刀最大硬直
+slash_speed = 6
 
-  slash_speed = 6
+function slash_boost()
 
   -- 昇龍拳解鎖
   if memory.read_u8(0x001FB1) == 128 then
     -- 出刀硬直會變最小
     slash_speed = 1
+  else
+    slash_speed = 6
   end
 
   -- 地上斬 76 / 空中斬 80
@@ -86,15 +99,34 @@ function double_jump()
 end
 
 --------------------------------------------------
+-- 一擊死模式
+-- 一滴血 & 無限命
+
+function one_hit_ko()
+  if memory.read_u8(0x0009FF) > 1 then
+    memory.write_u8(0x0009FF, 1)
+  end
+  memory.write_u8(0x0001FB3, 9)
+end
+
+--------------------------------------------------
 -- 主程式
 
 while true do
 
   -- 學長活著的時候生效
   if memory.read_u8(0x0009FF) ~= 0 then
+
     slash_senpai()
     slash_boost()
-    double_jump()
+
+    if is_double_jump == true then
+      double_jump()
+    end
+    if is_one_hit_ko == true then
+      one_hit_ko()
+    end
+
   end
 
 	emu.frameadvance()
