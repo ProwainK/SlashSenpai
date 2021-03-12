@@ -6,12 +6,17 @@
 
 -- 一撃必死挑戰
 -- 一滴血 & 無限命
-is_one_hit_ko = false
+is_one_hit_ko = true
 
 --------------------------------------------------
 -- for Bizhawk
 
 memory.usememorydomain("WRAM")
+
+--------------------------------------------------
+-- 全域變數
+
+player_hp = nil
 
 --------------------------------------------------
 -- 出刀前輩 Mod
@@ -38,6 +43,8 @@ function slash_senpai()
         else
           memory.write_u8(0x000A8F, 0)
         end
+      else
+        memory.write_u8(0x000A8F, 0)
       end
     end
   end
@@ -102,10 +109,10 @@ end
 -- 一滴血 & 無限命
 
 function one_hit_ko()
-  if memory.read_u8(0x0009FF) > 1 then
+  if player_hp > 0 and player_hp < 100 then
     memory.write_u8(0x0009FF, 1)
+    memory.write_u8(0x001FB4, 9)
   end
-  memory.write_u8(0x001FB4, 9)
 end
 
 --------------------------------------------------
@@ -113,8 +120,10 @@ end
 
 while true do
 
+  player_hp = memory.read_u8(0x0009FF)
+
   -- 角色活著的時候生效
-  if memory.read_u8(0x0009FF) ~= 0 then
+  if player_hp > 0 and player_hp < 100 then
 
     slash_senpai()
     slash_boost()
