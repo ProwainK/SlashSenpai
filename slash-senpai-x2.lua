@@ -115,7 +115,7 @@ end
 
 while true do
 
-  -- 學長活著的時候生效
+  -- 角色活著的時候生效
   if memory.read_u8(0x0009FF) ~= 0 then
 
     slash_senpai()

@@ -113,11 +113,16 @@ end
 
 while true do
 
-  slash_senpai()
-  slash_boost()
+  -- 角色活著的時候生效
+  if memory.read_u8(0x0009FF) ~= 0 then
 
-  if is_one_hit_ko == true then
-    one_hit_ko()
+    slash_senpai()
+    slash_boost()
+
+    if is_one_hit_ko == true then
+      one_hit_ko()
+    end
+
   end
 
 	emu.frameadvance()
