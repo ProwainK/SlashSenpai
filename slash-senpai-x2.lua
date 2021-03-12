@@ -7,7 +7,8 @@
 -- 二段跳
 is_double_jump = true
 
--- 一擊死模式
+-- 一撃必死挑戰
+-- 一滴血 & 無限命
 is_one_hit_ko = false
 
 --------------------------------------------------
@@ -99,14 +100,14 @@ function double_jump()
 end
 
 --------------------------------------------------
--- 一擊死模式
+-- 一撃必死挑戰
 -- 一滴血 & 無限命
 
 function one_hit_ko()
   if memory.read_u8(0x0009FF) > 1 then
     memory.write_u8(0x0009FF, 1)
   end
-  memory.write_u8(0x0001FB3, 9)
+  memory.write_u8(0x001FB3, 9)
 end
 
 --------------------------------------------------
