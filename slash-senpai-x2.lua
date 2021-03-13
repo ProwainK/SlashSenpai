@@ -8,13 +8,25 @@
 is_double_jump = true
 
 -- 一撃必死挑戰
--- 一滴血 & 無限命
+-- 一滴血 / 無限命
 is_one_hit_ko = false
 
 --------------------------------------------------
 -- for Bizhawk
 
 memory.usememorydomain("WRAM")
+
+--------------------------------------------------
+-- 全域變數
+
+-- 玩家 HP
+player_hp = nil
+
+-- 預設出刀最大硬直
+slash_speed = 6
+
+-- 跳躍計數器
+jump_count = 0
 
 --------------------------------------------------
 -- 出刀前輩 Mod
@@ -33,9 +45,6 @@ end
 
 --------------------------------------------------
 -- 出刀動畫加速
-
--- 預設出刀最大硬直
-slash_speed = 6
 
 function slash_boost()
 
@@ -58,8 +67,6 @@ end
 
 --------------------------------------------------
 -- 二段跳
-
-jump_count = 0
 
 function double_jump()
 
@@ -101,12 +108,10 @@ end
 
 --------------------------------------------------
 -- 一撃必死挑戰
--- 一滴血 & 無限命
+-- 一滴血 / 無限命
 
 function one_hit_ko()
-  if memory.read_u8(0x0009FF) > 1 then
-    memory.write_u8(0x0009FF, 1)
-  end
+  memory.write_u8(0x0009FF, 1)
   memory.write_u8(0x001FB3, 9)
 end
 
@@ -115,8 +120,10 @@ end
 
 while true do
 
+  player_hp = memory.read_u8(0x0009FF)
+
   -- 角色活著的時候生效
-  if memory.read_u8(0x0009FF) ~= 0 then
+  if player_hp > 0 and player_hp < 100 then
 
     slash_senpai()
     slash_boost()
