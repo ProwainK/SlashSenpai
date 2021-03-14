@@ -12,17 +12,17 @@ https://clips.twitch.tv/TastyCovertGuanacoKreygasm-a9rZtGVmspKJ4Zgy
 
 ## 為何而來 / WHY
 
-原改造版「Mega Man X2 Zero Playable」，
-雖然能夠使用學長，卻在各種地方改造並設下許多限制，
-甚至禁止了相當實用的空中衝刺，非常可惜。
-
-經過一番研究，除了解禁空衝之外，
-不經意間發展出一套學長能夠一直出刀的 Mod，
-這就是「出刀前輩 (Slash Senpai)」的由來。
-
-Slash Senpai modified from "Mega Man X2 Zero Playable" that allow you can play with Zero,  
-however the romhack itself design so much nerf, such as air dash disable.
-
+原改造版「Mega Man X2 Zero Playable」，  
+雖然能夠使用學長，卻在各種地方改造並設下許多限制，  
+甚至禁止了相當實用的空中衝刺，非常可惜。  
+  
+經過一番研究，除了解禁空衝之外，  
+不經意間發展出一套學長能夠一直出刀的 Mod，  
+這就是「出刀前輩 (Slash Senpai)」的由來。  
+  
+Slash Senpai modified from "Mega Man X2 Zero Playable" that allow you can play with Zero,   
+however the romhack itself design so much nerf, such as air dash disable.  
+  
 After some research, air dash come back, and zero can always slash now,  
 this is why the name "Slash Senpai".
 
@@ -90,7 +90,7 @@ Issue (dont know how to fix)：
 - 惱人的被揍連段系統 / Annoying Combo System when get hit
 - 二段跳後可以接空衝 / Air Dash after Double Jump
 - 集氣相關貼圖 Bug / Graphic Glitch when Zero charged
-- 對練拳機使用億兆爆破機率卡死 Bug / Agile Flyer softlock when Giga Crush
+- [為了輸出] 對練拳機使用億兆爆破機率卡死 Bug / [For DPS] Agile Flyer softlock when Giga Crush
 
 
 ------
@@ -116,11 +116,9 @@ PS 日版 / JP Version，開發中。
 
 ## BizHawk & Lua
 
-Mod 開發版本為 2.6.1，
-SFC 核心是 Snes9x。
+Mod 開發版本為 2.6.1，SFC 核心是 Snes9x。
 
-SFC 遊戲需要 CX4 ROM，
-PS 遊戲需要歐美日三種語言版本 BIOS。
+SFC 遊戲需要 CX4 ROM，PS 遊戲需要歐美日三種語言版本 BIOS。
 
 改造完成之後，使用 BizHawk 打開遊戲，  
 選單 Tools -> Lua Console，  
@@ -147,18 +145,18 @@ https://www.twitch.tv/pachi_zx
 
 ### X5 金手指提供
 
-World9918
-https://www.ptt.cc/bbs/Rockman/M.1316842395.A.AF2.html
-艾莉雅閉嘴
-https://www.ptt.cc/bbs/Rockman/M.1306374372.A.867.html
-關閉背景
-
-Append
-https://www.ptt.cc/bbs/Rockman/M.1449705915.A.D74.html
-智慧型關燈
-
-h1236660 & RMMH
-https://www.ptt.cc/bbs/Rockman/M.1500031661.A.9CC.html
+World9918  
+https://www.ptt.cc/bbs/Rockman/M.1316842395.A.AF2.html  
+艾莉雅閉嘴  
+https://www.ptt.cc/bbs/Rockman/M.1306374372.A.867.html  
+關閉背景  
+  
+Append  
+https://www.ptt.cc/bbs/Rockman/M.1449705915.A.D74.html  
+智慧型關燈  
+  
+h1236660 & RMMH  
+https://www.ptt.cc/bbs/Rockman/M.1500031661.A.9CC.html  
 圖層相關
 
 
