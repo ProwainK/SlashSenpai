@@ -4,9 +4,9 @@
 -- 手動選項
 -- 修改後面的 true 或 false，true 為開啟，false 為關閉
 
--- 一撃必死挑戰
--- 一滴血 / 無限命
-is_one_hit_ko = false
+-- 一撃必死挑戰 (一滴血 & 無限命)
+-- 已改為測試用功能，不推薦打開遊玩
+-- is_one_hit_ko = false
 
 --------------------------------------------------
 -- for Bizhawk
@@ -51,7 +51,7 @@ function slash_senpai()
 end
 
 --------------------------------------------------
--- 出刀動畫加速
+-- 出刀加速
 
 function slash_boost()
 
@@ -105,8 +105,7 @@ function slash_boost()
 end
 
 --------------------------------------------------
--- 一撃必死挑戰
--- 一滴血 / 無限命
+-- 一撃必死挑戰 (一滴血 & 無限命)
 
 function one_hit_ko()
   if player_hp > 0 and player_hp < 100 then
@@ -128,9 +127,11 @@ while true do
     slash_senpai()
     slash_boost()
 
+    --[[
     if is_one_hit_ko == true then
       one_hit_ko()
     end
+    --]]
 
   end
 

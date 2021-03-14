@@ -7,9 +7,9 @@
 -- 二段跳
 is_double_jump = true
 
--- 一撃必死挑戰
--- 一滴血 / 無限命
-is_one_hit_ko = false
+-- 一撃必死挑戰 (一滴血 & 無限命)
+-- 已改為測試用功能，不推薦打開遊玩
+-- is_one_hit_ko = false
 
 --------------------------------------------------
 -- for Bizhawk
@@ -20,9 +20,10 @@ memory.usememorydomain("WRAM")
 -- 全域變數
 
 -- 玩家 HP
-player_hp = nil
+player_hp = 0
+player_hp_before = 0
 
--- 預設出刀最大硬直
+-- 出刀初始硬直
 slash_speed = 6
 
 -- 跳躍計數器
@@ -32,9 +33,9 @@ jump_count = 0
 -- 出刀前輩 Mod
 
 function slash_senpai()
-  -- 豆炮 / 出刀狀態
+  -- 非特武狀態
   if memory.read_u8(0x000A0B) == 0 then
-    -- 集氣特效 / 音效取消
+    -- 集氣特效 & 音效取消
     memory.write_u8(0x000A33, 0)
     -- 二三段攻擊 Loop
     memory.write_u8(0x000A67, 1)
@@ -44,7 +45,7 @@ function slash_senpai()
 end
 
 --------------------------------------------------
--- 出刀動畫加速
+-- 出刀加速
 
 function slash_boost()
 
@@ -107,8 +108,105 @@ function double_jump()
 end
 
 --------------------------------------------------
--- 一撃必死挑戰
--- 一滴血 / 無限命
+-- 億兆爆破強化
+
+function giga_buff()
+
+  boss_iframe_addr = boss_iframe_addr_search()
+
+  -- Boss 戰 & 受擊判定有效期間 (練拳機卡死 Bug 修正)
+  --if boss_iframe_addr ~= 0 and memory.read_u8(0x001108) == 0 then
+
+  if boss_iframe_addr ~= 0 then
+    -- Boss 無敵縮短
+    if memory.read_u8(0x00110F) > 0 then
+      if memory.read_u8(boss_iframe_addr) > 1 then
+        memory.write_u8(boss_iframe_addr, 1)
+      end
+    end
+  end
+
+  -- 昇龍拳解鎖
+  if memory.read_u8(0x001FB1) == 128 then
+    -- 體當能源回復
+    current_giga_energy = memory.read_u8(0x001FCB)
+    if player_hp_before > player_hp then
+      add_energy = current_giga_energy + player_hp_before - player_hp
+      if add_energy > 92 then
+        add_energy = 92
+      end
+      memory.write_u8(0x001FCB, add_energy)
+    end
+    player_hp_before = player_hp
+    -- 地上斬瞬間能源回復
+    current_giga_energy = memory.read_u8(0x001FCB)
+    if memory.read_u8(0x000A7C) == 86 then
+      add_energy = current_giga_energy + 1
+      if add_energy > 92 then
+        add_energy = 92
+      end
+      memory.write_u8(0x001FCB, add_energy)
+    end
+  end
+
+end
+
+function boss_iframe_addr_search()
+
+  -- Boss Addr: 0x000D18, 0x000D58, 0x000D98, ...
+
+  for boss_addr = 0x000D18, 0x000F18, 0x40 do
+
+    -- Boss 活動中
+    if memory.read_u8(boss_addr + 0x03) ~= 0 then
+
+      boss_id = memory.read_u8(boss_addr + 0x0A)
+
+      if boss_id == 0x0E then     -- CF0
+        return (boss_addr + 0x33) -- 0x000DCB
+      elseif boss_id == 0x1D then -- 蝸牛
+        return (boss_addr + 0x38) -- 0x000D50
+      elseif boss_id == 0x1E then -- 螃蟹
+        return (boss_addr + 0x39) -- 0x000D51
+      elseif boss_id == 0x23 then -- 絲瓜
+        return (boss_addr + 0x37) -- 0x000D4F
+      elseif boss_id == 0x34 then -- 蜈蚣
+        return (boss_addr + 0x35) -- 0x000D4D
+      elseif boss_id == 0x35 then -- 鴕鳥
+        return (boss_addr + 0x35) -- 0x000D4D
+      elseif boss_id == 0x36 then -- 亞吉爾 (劍)
+        return (boss_addr + 0x35) -- 0x000D4D
+      elseif boss_id == 0x38 then -- 火鹿
+        return (boss_addr + 0x35) -- 0x000D4D
+      elseif boss_id == 0x3B then -- 飛蛾 1
+        return (boss_addr + 0x35) -- 0x000D4D
+      elseif boss_id == 0x4B then -- 飛蛾 2
+        return (boss_addr + 0x34) -- 0x000D8C
+      elseif boss_id == 0x45 then -- 鱷魚
+        return (boss_addr + 0x35) -- 0x000D8D
+      elseif boss_id == 0x56 then -- 薩凱斯 (爺)
+        return (boss_addr + 0x35) -- 0x000DCD
+      elseif boss_id == 0x59 then -- 練拳機
+        return (boss_addr + 0x36) -- 0x000D4E
+      elseif boss_id == 0x5A then -- 拜歐倫 (球)
+        return (boss_addr + 0x35) -- 0x000D8D
+      elseif boss_id == 0x63 then -- 薩凱斯 (坦)
+        return (boss_addr + 0x34) -- 0x000F0C
+      elseif boss_id == 0x67 then -- 老西 1
+        return (boss_addr + 0x37) -- 0x000D4F
+      else
+      end
+
+    end
+
+  end
+
+  return 0
+
+end
+
+--------------------------------------------------
+-- 一撃必死挑戰 (一滴血 & 無限命)
 
 function one_hit_ko()
   memory.write_u8(0x0009FF, 1)
@@ -127,13 +225,17 @@ while true do
 
     slash_senpai()
     slash_boost()
+    giga_buff()
 
     if is_double_jump == true then
       double_jump()
     end
+
+    --[[
     if is_one_hit_ko == true then
       one_hit_ko()
     end
+    --]]
 
   end
 
