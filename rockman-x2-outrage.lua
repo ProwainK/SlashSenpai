@@ -134,19 +134,73 @@ function boss_addr_search()
         memory.write_u8(boss_addr + 0x1F, 255)         -- 0x000D77
 
       -- Other
+      elseif enemy_id == 0x2C then                     -- 飛行柱子 0x2C
+        memory.write_u8(boss_addr + 0x13, 1)           -- 0x000D2B
+        if memory.read_u8(boss_addr + 0x02) == 2 then
+          memory.write_u16_le(boss_addr + 0x08, memory.read_u16_le(boss_addr + 0x08) - 1) -- 0x000D60
+        end
+        if memory.read_u8(boss_addr + 0x02) == 8 then
+          memory.write_u16_le(boss_addr + 0x08, memory.read_u16_le(boss_addr + 0x08) + 1) -- 0x000D60
+        end
+        if memory.read_u8(boss_addr + 0x02) == 12 then
+          memory.write_u8(boss_addr + 0x1A, 128)       -- 0x000D32
+        end
+        if memory.read_u8(boss_addr + 0x02) == 14 then
+          memory.write_u8(boss_addr + 0x1A, 128)       -- 0x000D32
+        end
       elseif enemy_id == 0x30 then                     -- 牆壁上的瓦斯 0x30
         memory.write_u8(boss_addr + 0x13, 1)           -- 0x000D2B
+      --[[
+      elseif enemy_id == 0x48 then                     -- 大斜坡 0x48
+        if memory.read_u8(boss_addr + 0x33) < 172 then
+          memory.write_u8(boss_addr + 0x33, 172)       -- 0x000D4B
+        end
+      --]]
+      elseif enemy_id == 0x2E then                     -- 岩漿 (速度) 0x2E
+        if memory.read_u16_le(boss_addr + 0x1C) >= 320 then
+          memory.write_u16_le(boss_addr + 0x1C, 450)   -- 0x000D34
+        end
+      elseif enemy_id == 0x31 then                     -- 岩漿 (動畫) 0x31
+        memory.write_u8(boss_addr + 0x13, 1)           -- 0x000D6B
+      elseif enemy_id == 0x39 then                     -- 鐵箱 0x39
+        memory.write_u8(boss_addr + 0x0F, 128)         -- 0x000D67
       elseif enemy_id == 0x3E then                     -- 飛彈發射上升 0x3E
         memory.write_u8(boss_addr + 0x1D, 10)          -- 0x000DB5
       elseif enemy_id == 0x51 then                     -- 水晶滑落 0x51
         memory.write_u8(boss_addr + 0x33, 1)           -- 0x000D4B
+      elseif enemy_id == 0x52 then                     -- 小斜坡 0x52
+        memory.write_u8(boss_addr + 0x34, 0)           -- 0x000D4C
+        if memory.read_u8(boss_addr + 0x27) == 15 then
+          memory.write_u8(boss_addr + 0x27, 6)         -- 0x000D3F
+        end
+      elseif enemy_id == 0x62 then                     -- 移動平台 0x62
+        if memory.read_u8(boss_addr + 0x1B) == 254 then
+          memory.write_u8(boss_addr + 0x1B, 252)       -- 0x000D33
+        end
+        if memory.read_u8(boss_addr + 0x1B) == 1 then
+          memory.write_u8(boss_addr + 0x1B, 3)         -- 0x000D33
+        end
+        if memory.read_u8(boss_addr + 0x1D) == 254 then
+          memory.write_u8(boss_addr + 0x1D, 252)       -- 0x000D35
+        end
+        if memory.read_u8(boss_addr + 0x1D) == 1 then
+          memory.write_u8(boss_addr + 0x1D, 3)         -- 0x000D35
+        end
 
       -- Mid Boss
       elseif enemy_id == 0x08 then                     -- 斬擊者 0x08
-        memory.write_u8(boss_addr + 0x17, 1)           -- 0x000D6F
-        --memory.write_u8(boss_addr + 0x3E, 1)           -- 0x000D96
+        if memory.read_u8(boss_addr + 0x03) == 2 and memory.read_u8(boss_addr + 0x2E) < 7 then
+          memory.write_u8(boss_addr + 0x2E, 7)         -- 0x000D46
+        end
+        if memory.read_u8(boss_addr + 0x17) > 6 then
+          memory.write_u8(boss_addr + 0x17, 6)         -- 0x000D2F
+        end
       elseif enemy_id == 0x12 then                     -- 操控者 S-38 0x12
         memory.write_u8(boss_addr + 0x13, 1)           -- 0x000D2B
+      elseif enemy_id == 0x14 then                     -- 老舊機器人 0x14
+        if memory.read_u8(boss_addr + 0x02) ~= 2 and memory.read_u8(boss_addr + 0x18) > 1 then
+          memory.write_u8(boss_addr + 0x18, 1)         -- 0x000D70
+        end
       elseif enemy_id == 0x29 then                     -- 深海坎斯勒
         memory.write_u8(boss_addr + 0x13, 1)           -- 0x000D6B
       elseif enemy_id == 0x2A then                     -- 深海坎斯勒
@@ -161,6 +215,7 @@ function boss_addr_search()
         end
       elseif enemy_id == 0x53 then                     -- 巨型晶體 (本體)
         memory.write_u8(boss_addr + 0x13, 1)           -- 0x000D2B
+        memory.write_u16_le(boss_addr + 0x37, 1)       -- 0x000D4F
 
       -- Boss
       elseif boss_id == 0x0E then -- CF0 0x0E
@@ -192,17 +247,24 @@ function boss_addr_search()
       elseif boss_id == 0x59 then -- 練拳機 0x59
         boss_outrage_sandbag(boss_addr)
       elseif boss_id == 0x5A then -- 拜歐倫 (球) 0x5A
-        memory.write_u8(boss_addr + 0x13, 1) -- 0x000D6B
+        if memory.read_u8(boss_addr + 0x27) > 0 then -- 0x000D3F
+          memory.write_u8(boss_addr + 0x13, 1) -- 0x000D6B
+          memory.write_u8(boss_addr + 0x33, 1) -- 0x000D8B
+        end
       elseif boss_id == 0x5E then -- 老西 2 0x5E
         if memory.read_u8(boss_addr + 0x02) == 10 then
           memory.write_u8(boss_addr + 0x39, 1) -- 0x000D91
         end
       elseif boss_id == 0x63 then -- 薩凱斯 (坦) 0x63
-        memory.write_u8(boss_addr + 0x36, 0) -- 0x000F0E
+        boss_outrage_serges_tank(boss_addr)
+        --memory.write_u8(boss_addr + 0x33, 1)           -- 0x000D4B
+        --memory.write_u8(boss_addr + 0x36, 0) -- 0x000F0E
       elseif boss_id == 0x67 then -- 老西 1 0x67
         memory.write_u8(boss_addr + 0x13, 1) -- 0x000D2B
       elseif boss_id == 0x68 then -- Zero 0x68
-        memory.write_u8(boss_addr + 0x13, 1) -- 0x000D2B
+        if memory.read_u8(boss_addr + 0x13) > 1 then
+          memory.write_u8(boss_addr + 0x13, 1) -- 0x000D2B
+        end
       else
       end
 
@@ -422,7 +484,7 @@ function boss_outrage_magnet_centipede(boss_addr)
     end
 
     if ttimer < 1 and boss_move_id == 8 and boss_move_state == 1 then
-memory.write_u8(boss_move_id_addr, 18)
+      memory.write_u8(boss_move_id_addr, 18)
       memory.write_u8(boss_move_state_addr, 0)
       memory.write_u8(0x000D4C, 1)
       ttimer = 300
@@ -462,27 +524,21 @@ function boss_outrage_sonic_ostrich(boss_addr)
     local boss_outrage_speed = 1
 
     -- 通用 1
-    if memory.read_u8(boss_addr + 0x13) > boss_outrage_speed then -- 0x000D2B
+    if memory.read_u8(boss_addr + 0x13) > boss_outrage_speed then
       if boss_move_id == 4 and boss_move_state == 4 then -- 平地突進前置
       elseif boss_move_id == 6 and boss_move_state ~= 18 then -- 跳躍突進，除了最後的轉身
-      elseif boss_move_id == 10 and boss_move_state == 12 then -- 音波群後落地硬直
       else
-        memory.write_u8(boss_addr + 0x13, boss_outrage_speed)
-      end
-    end
-
-    -- 音波群後落地硬直
-    if boss_move_id == 10 and boss_move_state == 12 then
-      if memory.read_u8(boss_addr + 0x13) > 6 then -- 0x000D2B
-        memory.write_u8(boss_addr + 0x13, 6)
+        memory.write_u8(boss_addr + 0x13, boss_outrage_speed) -- 0x000D2B
       end
     end
 
     -- 通用 2
-    if memory.read_u8(boss_addr + 0x34) > boss_outrage_speed then -- 0x000D4C
-      if boss_move_id == 6 then -- 跳躍突進
+    if memory.read_u8(boss_addr + 0x34) > boss_outrage_speed then
+      if boss_move_id == 0 then -- 無狀態，防止破圖
+      elseif boss_move_id == 2 then -- 被打中弱點
+      elseif boss_move_id == 6 then -- 跳躍突進
       else
-        memory.write_u8(boss_addr + 0x34, boss_outrage_speed)
+        memory.write_u8(boss_addr + 0x34, boss_outrage_speed) -- 0x000D4C
       end
     end
 
@@ -537,28 +593,45 @@ function boss_outrage_flame_stag(boss_addr)
 
     -- 通用 1
     if memory.read_u8(boss_addr + 0x13) > boss_outrage_speed then -- 0x000D2B
-      memory.write_u8(boss_addr + 0x13, boss_outrage_speed)
-    end
-
-    -- 
-    if boss_hp < 13 then
-
-    -- 通用 2
-    if memory.read_u8(boss_addr + 0x34) > boss_outrage_speed then -- 0x000D4C
-      memory.write_u8(boss_addr + 0x34, boss_outrage_speed)
-    end
-
-    if boss_move_id == 10 then
-      memory.write_u8(0x00132B, 1)
-    end
-
-    if boss_move_id == 10 then
-      if boss_move_state == 0 or boss_move_state == 4 then
-      memory.write_u8(0x001320, 190)
+      if boss_move_id ~= 2 then
+        memory.write_u8(boss_addr + 0x13, boss_outrage_speed)
       end
     end
 
+    -- 通用 2
+    if memory.read_u8(boss_addr + 0x34) > boss_outrage_speed then -- 0x000D4C
+      if boss_move_id ~= 2 then
+        memory.write_u8(boss_addr + 0x34, boss_outrage_speed)
+      end
     end
+
+    if boss_move_id == 2 and boss_move_state == 4 then
+      memory.write_u8(boss_move_id_addr, 12)
+      memory.write_u8(boss_move_state_addr, 0)
+      memory.write_u8(0x000D4D, 110) -- 0x000D45
+    end
+
+    if boss_move_id == 4 and boss_move_state == 6 then
+      memory.write_u8(boss_move_id_addr, 8)
+      memory.write_u8(boss_move_state_addr, 2)
+    end
+
+    if boss_move_id == 8 and boss_move_state == 8 then
+      memory.write_u8(boss_move_id_addr, 12)
+      memory.write_u8(boss_move_state_addr, 0)
+    end
+
+    if boss_move_id == 10 then
+      --memory.write_u8(boss_addr + 0x2D, 0) -- 0x000D45
+      --memory.write_u8(boss_addr + 0x2E, 0) -- 0x000D46
+    end
+
+    if boss_move_id == 10 and boss_move_state == 8 then
+      --memory.write_u8(boss_move_id_addr, 0)
+      --memory.write_u8(boss_move_state_addr, 0)
+    end
+
+    -- 火球 0x1A Outrage
 
   end
 
@@ -736,29 +809,102 @@ function boss_outrage_sandbag(boss_addr)
 end
 
 --------------------------------------------------
+-- 薩凱斯 (坦) Outrage
+-- Boss addr: 0x000ED8
+
+function boss_outrage_serges_tank(boss_addr)
+
+  local boss_hp = memory.read_u8(boss_addr + 0x27) -- 0x000D7F
+
+  if boss_hp > 0 then
+
+    local boss_move_id_addr = boss_addr + 0x02
+    local boss_move_id = memory.read_u8(boss_move_id_addr)
+    local boss_move_state_addr = boss_addr + 0x03
+    local boss_move_state = memory.read_u8(boss_move_state_addr)
+    local boss_outrage_speed = 12
+
+    -- 通用 1
+    if memory.read_u8(boss_addr + 0x33) > boss_outrage_speed then
+      if boss_move_id == 8 then
+        memory.write_u8(boss_addr + 0x33, boss_outrage_speed) -- 0x000F0B
+      end
+    end
+
+    -- 通用 2
+    memory.write_u8(boss_addr + 0x36, 1) -- 0x000F0E
+
+  end
+
+end
+
+--------------------------------------------------
+-- 載具 Outrage
+
+vehicle_boost_count = 0
+
+function vehicle_outrage()
+
+  -- 通用
+  memory.write_u8(0x000CDB, 1)
+
+  -- 加速極限提升
+  if memory.read_u8(0x000CE3) >= 6 and memory.read_u8(0x000CE3) < 120 then
+    if memory.read_u8(0x000D05) == 2 and memory.read_u8(0x000CE1) ~= 4 then
+      memory.write_u8(0x000CE3, 7)
+    else
+      memory.write_u8(0x000CE3, 9)
+    end
+  end
+  if memory.read_u8(0x000CE3) <= 249 and memory.read_u8(0x000CE3) > 130 then
+    if memory.read_u8(0x000D05) == 2 and memory.read_u8(0x000CE1) ~= 4 then
+      memory.write_u8(0x000CE3, 248)
+    else
+      memory.write_u8(0x000CE3, 246)
+    end
+  end
+
+end
+
+--------------------------------------------------
+-- 特殊武器 Outrage
+
+function special_weapons_outrage()
+  memory.write_u8(0x000A0D, 0)
+  memory.write_u8(0x000A82, 1)
+  memory.write_u8(0x001F64, 1) -- 鐮刀連發
+  --memory.write_u8(0x000A55, 0) -- 使用集氣特武期間可繼續射擊 (氣泡集氣 + 機雷必定當機)
+end
+
+--------------------------------------------------
 -- 飛行道具 Outrage
 
-function fly_atk_item_outrage()
+function air_attack_outrage()
 
-  for faitem_addr = 0x001318, 0x001598, 0x40 do
+  for aaitem_addr = 0x001318, 0x001598, 0x40 do
 
-    -- 飛行道具活動中 0x00131A or 0x00131B
-    if memory.read_u8(faitem_addr + 0x02) ~= 0 or memory.read_u8(faitem_addr + 0x03) ~= 0 then
+    -- 飛行道具活動中
+    if memory.read_u8(aaitem_addr) ~= 0 then
 
-      faitem_id = memory.read_u8(faitem_addr + 0x0A) -- 0x001322
+      aaitem_id = memory.read_u8(aaitem_addr + 0x0A) -- 0x001322
 
-      if faitem_id == 0x14 then -- 手裡劍 (蜈蚣)
-        if memory.read_u8(faitem_addr + 0x1B) > 128 then
-          --memory.write_u8(faitem_addr + 0x1B, 230) -- 0x001333
+      if aaitem_id == 0x14 then -- 手裡劍 (蜈蚣)
+        if memory.read_u8(aaitem_addr + 0x1B) > 128 then
+          --memory.write_u8(aaitem_addr + 0x1B, 230) -- 0x001333
         end
-        if memory.read_u8(faitem_addr + 0x1B) < 128 then
-          --memory.write_u8(faitem_addr + 0x1B, 25)
+        if memory.read_u8(aaitem_addr + 0x1B) < 128 then
+          --memory.write_u8(aaitem_addr + 0x1B, 25)
         end
 
-        --memory.write_u8(faitem_addr + 0x38, 255) -- 0x001350
+        --memory.write_u8(aaitem_addr + 0x38, 255) -- 0x001350
 
         memory.write_u8(0x001368, memory.read_u8(0x001368) - 50) -- 0x001350
 
+      elseif aaitem_id == 0x1A then -- 火球 (火鹿)
+        if memory.read_u8(aaitem_addr + 0x1D) == 5 then
+          memory.write_u8(aaitem_addr + 0x1D, 8) -- 0x001335
+        end
+      else
       end
 
     end
@@ -786,7 +932,9 @@ while true do
   if player_hp > 0 and player_hp < 100 then
 
     enemy_outrage()
-    --fly_atk_item_outrage()
+    --air_attack_outrage()
+    vehicle_outrage()
+    special_weapons_outrage()
 
     --[[
     if is_one_hit_ko == true then
