@@ -872,7 +872,7 @@ end
 function special_weapons_outrage()
   memory.write_u8(0x000A0D, 0)
   memory.write_u8(0x000A82, 1)
-  memory.write_u8(0x001F64, 1) -- 鐮刀連發
+  --memory.write_u8(0x001F64, 1) -- 鐮刀連發
   --memory.write_u8(0x000A55, 0) -- 使用集氣特武期間可繼續射擊 (氣泡集氣 + 機雷必定當機)
 end
 
