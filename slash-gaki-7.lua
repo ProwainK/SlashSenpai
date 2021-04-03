@@ -9,53 +9,73 @@ memory.usememorydomain("WRAM")
 -- 全域變數
 
 player_hp = 0
-boss_hp = 0
-boss_hp_before = 0
+
+--------------------------------------------------
+-- 特武解禁檢查
+
+function slash_unlock_check()
+
+  -- 博物館尚未攻略 -> 解禁
+  if memory.read_u8(0x000B7A) == 0 then
+    memory.write_u8(0x000B8D, 156)
+    return
+  end
+
+  -- 已觸發進城劇情 -> 解禁
+  if memory.read_u8(0x000B7C) == 1 then
+    memory.write_u8(0x000B8D, 156)
+    return
+  end
+
+  -- 已解鎖後四關
+  if memory.read_u8(0x000B7B) == 1 then
+    if memory.read_u8(0x000B8C) == 255 then
+      -- 已擊敗貓爪人 -> 解禁
+      memory.write_u8(0x000B8D, 156)
+      return
+    else
+      -- 關卡脫離 & 選關 & 密碼 -> 封印
+      if memory.read_u8(0x0000E1) == 4 then
+        memory.write_u8(0x000B8D, 0)
+        return
+      end
+      -- 關卡裡面 -> 解禁
+      if player_hp > 0 then
+        memory.write_u8(0x000B8D, 156)
+      else
+        memory.write_u8(0x000B8D, 0)
+      end
+    end
+  end
+
+end
 
 --------------------------------------------------
 -- 出刀小子 Mod
 
 function slash_gaki()
 
-  -- 特武解禁 & 無限能源
-  memory.write_u8(0x000B8D, 156)
+  current_weapon = memory.read_u8(0x000BC7)
 
-  -- 真空切斷期間
-  if memory.read_u8(0x000BC7) == 5 then
-
+  if current_weapon == 5 then      -- 真空切斷
     -- 斬擊加速
     if memory.read_u8(0x000C75) > 2 then
       memory.write_u8(0x000C75, 2)
     end
-
-    -- 斬擊附帶吸血效果
-    slash_drain()
-
+    -- 跳躍高度加強
+    if memory.read_u8(0x000C13) == 28 and memory.read_u8(0x000C1B) < 128 then
+      memory.write_u8(0x000C1A, 255)
+    end
+  elseif current_weapon == 14 then -- 萊西裝甲
+    -- 無限飛行次數
+    memory.write_u8(0x000C77, 0)
   end
 
   -- 連射解禁
   memory.write_u8(0x000BC8, 0)
 
   --memory.write_u8(0x000BC7, 5) -- 特殊武器鎖定
-  --memory.write_u8(0x000C5E, 6) -- 顏色鎖定 (無效？)
-
-end
-
---------------------------------------------------
--- 斬擊附帶吸血效果
-
-function slash_drain()
-
-  boss_hp = memory.read_u8(0x0019EE)
-
-  if boss_hp < boss_hp_before then
-    memory.write_u8(0x000C2E, memory.read_u8(0x000C2E) + (boss_hp_before - boss_hp))
-    if memory.read_u8(0x000C2E) > 28 then
-      memory.write_u8(0x000C2E, 28)
-    end
-  end
-
-  boss_hp_before = memory.read_u8(0x0019EE)
+  --memory.write_u8(0x000C5E, 151) -- 顏色鎖定 (無效？)
 
 end
 
@@ -65,6 +85,8 @@ end
 while true do
 
   player_hp = memory.read_u8(0x000C2E)
+
+  slash_unlock_check()
 
   if player_hp > 0 then
 
