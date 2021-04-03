@@ -39,9 +39,16 @@ function slash_unlock_check()
         memory.write_u8(0x000B8D, 0)
         return
       end
-      -- 關卡裡面 -> 解禁
+      -- 關卡裡面
       if player_hp > 0 then
+        -- 其他關卡 -> 解禁
         memory.write_u8(0x000B8D, 156)
+        -- 貓爪人的房門 -> 封印 (靠牆壁會歸零)
+        if memory.read_u8(0x000B73) == 5 then
+          if memory.read_u8(0x000C06) == 26 and memory.read_u8(0x000C05) < 30 then
+            memory.write_u8(0x000B8D, 0)
+          end
+        end
       else
         memory.write_u8(0x000B8D, 0)
       end
