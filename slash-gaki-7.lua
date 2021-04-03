@@ -81,9 +81,17 @@ function slash_gaki()
       memory.write_u8(0x000C75, 2)
     end
     -- 跳躍高度加強
-    if memory.read_u8(0x000C13) == 28 and memory.read_u8(0x000C1B) < 128 then
-      memory.write_u8(0x000C1A, 255)
+    if memory.read_u8(0x000C1B) < 128 then
+      if memory.read_u8(0x000C13) == 28 or memory.read_u8(0x000C13) == 29 then
+        memory.write_u8(0x000C1A, 255)
+      end
     end
+
+    --[[if memory.read_u8(0x000C13) == 28 and memory.read_u8(0x000C1B) < 128 then
+      memory.write_u8(0x000C1A, 255)
+    end--]]
+
+
   elseif current_weapon == 14 then -- 萊西裝甲
     -- 無限飛行次數
     memory.write_u8(0x000C77, 0)
@@ -95,6 +103,38 @@ function slash_gaki()
   --memory.write_u8(0x000BC7, 5) -- 特殊武器鎖定
   --memory.write_u8(0x000C5E, 151) -- 顏色鎖定 (無效？)
 
+end
+
+--------------------------------------------------
+-- 輸送龜改造
+
+function slash_gamerizer()
+
+  if memory.read_u8(0x000B73) == 11 and memory.read_u8(0x000B74) == 3 then
+
+    -- 撞擊扣血
+    if memory.read_u8(0x0019C2) == 12 and memory.read_u8(0x0019C3) == 0 then
+      memory.write_u8(0x0019EE, memory.read_u8(0x0019EE) - 2)
+    end
+
+    -- 沒血自爆
+    if memory.read_u8(0x0019C1) == 4 and memory.read_u8(0x0019EE) == 0 then
+      memory.write_u8(0x0019C1, 14)
+      memory.write_u8(0x001100, 1)
+      memory.write_u8(0x00110A, 51)
+      memory.write_u8(0x00110C, 192)
+      memory.write_u8(0x00110D, 25)
+      memory.write_u8(0x001118, 1)
+    end
+
+  end
+
+end
+
+--------------------------------------------------
+-- Wily 1 改造
+
+function slash_wily_1()
 end
 
 --------------------------------------------------
@@ -110,6 +150,12 @@ while true do
 
     -- 出刀小子 Mod
     slash_gaki()
+
+    -- 輸送龜改造
+    slash_gamerizer()
+
+    -- Wily 1 改造
+    --slash_wily_1()
 
   end
 
