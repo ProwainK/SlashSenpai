@@ -43,8 +43,19 @@ function slash_unlock_check()
       if player_hp > 0 then
         -- 其他關卡 -> 解禁
         memory.write_u8(0x000B8D, 156)
-        -- 貓爪人的房門 -> 封印 (靠牆壁會歸零)
-        if memory.read_u8(0x000B73) == 5 then
+        -- Exit 道具 -> 封印
+        if memory.read_u8(0x001F94) == 1 and memory.read_u8(0x001F91) == 3 then
+          memory.write_u8(0x000B8D, 0)
+          return
+        end
+        -- 貓爪人的房門
+        if memory.read_u8(0x000B73) == 5 and memory.read_u8(0x000B74) == 2 then
+          -- 貓爪人爆炸 -> 解禁
+          if memory.read_u8(0x0019C1) == 4 then
+            memory.write_u8(0x000B8C, 255)
+            return
+          end
+          -- 判定相關 / 靠牆壁 -> 封印 (能源會歸零)
           if memory.read_u8(0x000C06) == 26 and memory.read_u8(0x000C05) < 30 then
             memory.write_u8(0x000B8D, 0)
           end
