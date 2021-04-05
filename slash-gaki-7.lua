@@ -9,6 +9,7 @@ memory.usememorydomain("WRAM")
 -- 全域變數
 
 player_hp = 0
+subtank_points = 0
 
 --------------------------------------------------
 -- 特武解禁檢查
@@ -80,18 +81,10 @@ function slash_gaki()
     if memory.read_u8(0x000C75) > 2 then
       memory.write_u8(0x000C75, 2)
     end
-    -- 跳躍高度加強
-    if memory.read_u8(0x000C1B) < 128 then
-      if memory.read_u8(0x000C13) == 28 or memory.read_u8(0x000C13) == 29 then
-        memory.write_u8(0x000C1A, 255)
-      end
-    end
-
-    --[[if memory.read_u8(0x000C13) == 28 and memory.read_u8(0x000C1B) < 128 then
-      memory.write_u8(0x000C1A, 255)
-    end--]]
-
-
+    -- 威利 1 劍氣變電球
+    slash_wily_1()
+    -- 威利 2 劍氣變彈簧
+    slash_wily_2()
   elseif current_weapon == 14 then -- 萊西裝甲
     -- 無限飛行次數
     memory.write_u8(0x000C77, 0)
@@ -106,25 +99,43 @@ function slash_gaki()
 end
 
 --------------------------------------------------
+-- 跳躍高度加強
+
+function high_jump()
+  if memory.read_u8(0x000C1B) < 128 then
+    if memory.read_u8(0x000C13) == 28 or memory.read_u8(0x000C13) == 29 then
+      memory.write_u8(0x000C1A, 255)
+    end
+  end
+end
+
+--------------------------------------------------
 -- 輸送龜改造
 
 function slash_gamerizer()
 
   if memory.read_u8(0x000B73) == 11 and memory.read_u8(0x000B74) == 3 then
 
-    -- 撞擊扣血
+    -- 撞牆扣血
     if memory.read_u8(0x0019C2) == 12 and memory.read_u8(0x0019C3) == 0 then
-      memory.write_u8(0x0019EE, memory.read_u8(0x0019EE) - 2)
-    end
 
-    -- 沒血自爆
-    if memory.read_u8(0x0019C1) == 4 and memory.read_u8(0x0019EE) == 0 then
-      memory.write_u8(0x0019C1, 14)
-      memory.write_u8(0x001100, 1)
-      memory.write_u8(0x00110A, 51)
-      memory.write_u8(0x00110C, 192)
-      memory.write_u8(0x00110D, 25)
-      memory.write_u8(0x001118, 1)
+      -- 傷害實作
+      memory.write_u8(0x0019EE, memory.read_u8(0x0019EE) - 2)
+
+      if memory.read_u8(0x0019EE) > 128 then
+        memory.write_u8(0x0019EE, 0)
+      end
+
+      -- 沒血自爆
+      if memory.read_u8(0x0019C1) == 4 and memory.read_u8(0x0019EE) == 0 then
+        memory.write_u8(0x0019C1, 14)
+        memory.write_u8(0x001100, 1)
+        memory.write_u8(0x00110A, 51)
+        memory.write_u8(0x00110C, 192)
+        memory.write_u8(0x00110D, 25)
+        memory.write_u8(0x001118, 1)
+      end
+
     end
 
   end
@@ -132,9 +143,80 @@ function slash_gamerizer()
 end
 
 --------------------------------------------------
--- Wily 1 改造
+-- 威利 1 劍氣變電球
 
 function slash_wily_1()
+
+  if memory.read_u8(0x0019CA) ~= 92 then
+    return
+  end
+
+  if memory.read_u8(0x000CEF) ~= 0 then
+    memory.write_u8(0x000CEF, 255)
+    -- 劍氣變電球
+    memory.write_u8(0x000CCA, 4)
+    memory.write_u8(0x000CC1, 0)
+  end
+
+  if memory.read_u8(0x000CC1) > 2 then
+    memory.write_u8(0x000CC0, 0)
+    memory.write_u8(0x000CC1, 0)
+  end
+
+end
+
+--------------------------------------------------
+-- 威利 2 劍氣變彈簧
+
+function slash_wily_2()
+
+  if memory.read_u8(0x0019CA) ~= 90 and memory.read_u8(0x0019CA) ~= 76 then
+    return
+  end
+
+  if memory.read_u8(0x000CEF) ~= 0 then
+    memory.write_u8(0x000CEF, 255)
+    -- 劍氣變彈簧
+    memory.write_u8(0x000CCA, 18)
+    memory.write_u8(0x000CC1, 0)
+  end
+
+  if memory.read_u8(0x000CC1) > 2 then
+    memory.write_u8(0x000CC0, 0)
+    memory.write_u8(0x000CC1, 0)
+  end
+
+end
+
+--------------------------------------------------
+-- 集點換 E 罐
+
+function slash_subtank()
+
+  -- 一罐需要 28 點
+  if subtank_points >= 28 then
+
+    subtank_now = memory.read_u8(0x000BA0)
+
+    -- 身上沒帶滿的狀態
+    if subtank_now < 4 then
+      -- E 罐 +1
+      memory.write_u8(0x000BA0, subtank_now + 1)
+      -- E 罐音效
+      memory.write_u8(0x000B50, 2)
+      memory.write_u8(0x000B51, 0)
+      memory.write_u8(0x000B52, 18)
+      memory.write_u8(0x000B53, 0)
+      -- 點數歸零
+      subtank_points = 0
+    end
+
+    return
+
+  end
+
+  subtank_points = subtank_points + 1
+
 end
 
 --------------------------------------------------
@@ -144,6 +226,7 @@ while true do
 
   player_hp = memory.read_u8(0x000C2E)
 
+  -- 特武解禁檢查
   slash_unlock_check()
 
   if player_hp > 0 then
@@ -151,23 +234,13 @@ while true do
     -- 出刀小子 Mod
     slash_gaki()
 
+    -- 跳躍高度加強
+    high_jump()
+
     -- 輸送龜改造
-    slash_gamerizer()
-
-    -- Wily 1 改造
-    --slash_wily_1()
+    --slash_gamerizer()
 
   end
-
-  -- 頭目無敵縮短
-  --[[
-  if memory.read_u8(0x0019F6) > 12 then
-    memory.write_u8(0x0019F6, 12)
-  end
-  --]]
-
-  -- 頭目 Boost
-  --memory.write_u8(0x0019F2, 1)
 
 	emu.frameadvance()
 end
