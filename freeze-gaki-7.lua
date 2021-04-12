@@ -49,6 +49,8 @@ function freeze_unlock_check()
       -- Boss 房門前重生點 & 房間裡面
       if memory.read_u8(0x000B74) == 2 then
 
+        memory.write_u8(0x000B85, 156)
+
         -- 房間裡面 -> 可以用但仍然是未打贏狀態
         if memory.read_u8(0x000C06) == 23 then
           memory.write_u8(0x000B85, 28)
@@ -89,9 +91,6 @@ function freeze_gaki()
       memory.write_u8(0x000C75, 2)
     end
 
-    -- 子彈改造
-    --bullets_modify()
-
   elseif current_weapon == 14 then -- 萊西裝甲
 
     -- 無限飛行次數
@@ -99,12 +98,13 @@ function freeze_gaki()
 
   end
 
-  bullets_modify()
-
   -- 連射解禁
   memory.write_u8(0x000BC8, 0)
   -- 集氣解禁
   memory.write_u8(0x000BC9, 0)
+
+  -- 子彈改造
+  bullets_modify()
 
 end
 
