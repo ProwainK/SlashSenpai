@@ -102,11 +102,17 @@ end
 -- 跳躍高度加強
 
 function high_jump()
+
+  if memory.read_u8(0x0019CA) == 4 and memory.read_u8(0x0019EE) == 0 then
+    memory.write_u8(0x000C2F, 1)
+  end
+
   if memory.read_u8(0x000C1B) < 128 then
     if memory.read_u8(0x000C13) == 28 or memory.read_u8(0x000C13) == 29 then
       memory.write_u8(0x000C1A, 255)
     end
   end
+
 end
 
 --------------------------------------------------
