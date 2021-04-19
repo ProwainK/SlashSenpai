@@ -44,10 +44,10 @@ Fix value at 0x00043B66 from B0 to D0 by IPS Peek.
 
 ## Mod 開發版本 & BIOS 需求
 
-Mod 開發版本為 BizHawk 2.6.1，SFC 核心是 Snes9x。
+Mod 開發版本為 BizHawk 2.6.1，SFC 核心是 Snes9x。  
 SFC 遊戲需要 CX4 ROM，PS 遊戲需要歐美日三種語言版本 BIOS。
 
-BizHawk 2.6.1 with Snes9x (SNES Core).
+BizHawk 2.6.1 with Snes9x (SNES Core).  
 SNES need CX4 ROM, PSX need JP/US/EN BIOS.
 
 
@@ -59,7 +59,7 @@ SNES need CX4 ROM, PSX need JP/US/EN BIOS.
 1. 打開 Bizhawk
 2. 選擇 ROM，先開始玩遊戲、先開始玩遊戲、先開始玩遊戲
 3. 打開遊戲之後，Bizhawk 上方的選單點擊「Tools」->「Lua Console」，就會看到 Lua 小視窗
-4. 在 Lua 小視窗的選單點擊「Script」-> Open Script」
+4. 在 Lua 小視窗的選單點擊「Script」->「Open Script」
 5. 選擇下載回來的 Lua 檔「slash-senpai-x3.lua」
 6. ▶️ 表示成功打開，⏸️ 表示暫停
 
