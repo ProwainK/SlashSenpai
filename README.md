@@ -56,8 +56,8 @@ SNES need CX4 ROM, PSX need JP/US/EN BIOS.
 ## [Bizhawk] 如何使用 Lua 檔 / How to use Lua script
 
 以洛克人 X3 為例：
-1. 「開始遊戲，進度到關卡中更佳」
-   「開始遊戲，進度到關卡中更佳」
+1. 「開始遊戲，進度到關卡中更佳」  
+   「開始遊戲，進度到關卡中更佳」  
    「開始遊戲，進度到關卡中更佳」
 2. 在 Bizhawk 上方的選單點擊「Tools」->「Lua Console」，就會看到 Lua 小視窗
 3. 在 Lua 小視窗的選單點擊「Script」->「Open Script」
@@ -66,11 +66,10 @@ SNES need CX4 ROM, PSX need JP/US/EN BIOS.
 
 Rockman X3 (Mega Man X3) for example:
 1. Make sure you are playing game
-2. Open rom and play game first
-3. After that, click 'Tools' -> 'Lua Console' to open Lua console
-4. In Lua console, click 'Script' -> 'Open Script'
-5. select 'slash-senpai-x3.lua'
-6. ▶️ mean open successful，⏸️ mean pause
+2. click 'Tools' -> 'Lua Console' to open Lua console
+3. In Lua console, click 'Script' -> 'Open Script'
+4. select 'slash-senpai-x3.lua'
+5. ▶️ mean open successful，⏸️ mean pause
 
 ![Imgur](https://i.imgur.com/QMSc6ug.gif)
 
