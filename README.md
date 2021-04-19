@@ -172,6 +172,7 @@ and 'Enemy in Speed Type - Mega Man X Series' in niconico,
 basically change speed of enemies, vehicles or movement platform,  
 to make more fun and challenge.
 
+
 ------
 
 ## 出刀小子 7 / Slash Gaki 7
@@ -220,14 +221,14 @@ Run in original PSX JP version, in development.
 
 ## 出刀蒼真 GBA / Slash Soma GBA
 
-使用官方 GBA 日版。
+使用官方 GBA 日版《惡魔城：曉月圓舞曲》(キャッスルヴァニア：暁月の円舞曲)。
 
 Lua 改造：
 - 出刀加速
 - 子彈數上升
 - 無限魔力
 
-Run in original GBA JP version.
+Run in original GBA JP version of Castlevania: Aria of Sorrow.
 
 Lua Mod:
 - Slash Boost
@@ -239,7 +240,7 @@ Lua Mod:
 
 ## 超級飆速亞瑟 / Super Arthur Turbo
 
-使用官方 SFC 日版。
+使用官方 SFC 日版《超魔界村》(超魔界村)。
 
 Lua 改造：
 - 連射解禁
@@ -248,7 +249,7 @@ Lua 改造：
 也可以搭配改造版「Super Ghouls N Ghosts - Super Arthur」使用，  
 內建就有連射解禁的功能。
 
-Run in original SNES JP version.
+Run in original SNES JP version of Super Ghouls 'n Ghosts.
 
 Lua Mod:
 - Turbo Fire Unlock
@@ -260,11 +261,19 @@ that already have basic turbo fire unlock function.
 
 ------
 
-## 戰鬥原始人 3 改造 / Slash Joe and Mac 3
+## 亢奮原始人 3 / Hyper Joe and Mac 3
 
-使用官方 SFC 日版，開發中。
+使用官方 SFC 日版《戰鬥原始人 3》(戦え原始人 3：主役はやっぱり JOE&MAC)。
 
-Run in original SNES JP version, in development.
+Lua 改造：
+- Joe 加速 Mod
+- Mac 加速 Mod
+
+Run in original SNES JP version of Joe & Mac 2: Lost in the Tropics.
+
+Lua Mod:
+- Joe Hyper Mod
+- Mac Hyper Mod
 
 
 ------
