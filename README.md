@@ -160,16 +160,16 @@ Run in original PSX JP version, in development.
 
 使用官方 SFC 日版，開發中。
 
-設計概念來自於鴉片 (Append) 製作的「洛克人 X4 Boost」，
-以及在 Niconico 動畫上的「一部敵速型 - 洛克人 X 系列」，
-除了最基本的敵加速，還會加速載具、移動裝置等。
+設計概念來自於鴉片 (Append) 製作的「洛克人 X4 Boost」，  
+以及在 Niconico 動畫上的「一部敵速型 - 洛克人 X 系列」，  
+除了最基本的敵加速，還會加速載具、移動裝置等。  
 來增加額外的趣味以及挑戰性。
 
 Run in original SNES JP version, in development.
 
-Idea for 'Rockman X4 Boost' made by Append,
-and 'Enemy in Speed Type - Mega Man X Series' in niconico,
-basically change speed of enemies, vehicles or movement platform,
+Idea for 'Rockman X4 Boost' made by Append,  
+and 'Enemy in Speed Type - Mega Man X Series' in niconico,  
+basically change speed of enemies, vehicles or movement platform,  
 to make more fun and challenge.
 
 ------
@@ -245,7 +245,7 @@ Lua 改造：
 - 連射解禁
 - 二段跳連射解禁
 
-也可以搭配改造版「Super Ghouls N Ghosts - Super Arthur」使用，
+也可以搭配改造版「Super Ghouls N Ghosts - Super Arthur」使用，  
 內建就有連射解禁的功能。
 
 Run in original SNES JP version.
@@ -254,7 +254,7 @@ Lua Mod:
 - Turbo Fire Unlock
 - Turbo Fire Unlock when Double Jump
 
-This mod also can run in ROM Hack 'Super Ghouls N Ghosts - Super Arthur',
+This mod also can run in ROM Hack 'Super Ghouls N Ghosts - Super Arthur',  
 that already have basic turbo fire unlock function.
 
 
