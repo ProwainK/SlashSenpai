@@ -56,22 +56,23 @@ SNES need CX4 ROM, PSX need JP/US/EN BIOS.
 ## [Bizhawk] 如何使用 Lua 檔 / How to use Lua script
 
 以洛克人 X3 為例：
-1. 打開 Bizhawk
-2. 選擇 ROM，先開始玩遊戲、先開始玩遊戲、先開始玩遊戲
-3. 打開遊戲之後，Bizhawk 上方的選單點擊「Tools」->「Lua Console」，就會看到 Lua 小視窗
-4. 在 Lua 小視窗的選單點擊「Script」->「Open Script」
-5. 選擇下載回來的 Lua 檔「slash-senpai-x3.lua」
-6. ▶️ 表示成功打開，⏸️ 表示暫停
+1. 「開始遊戲，進度到關卡中更佳」
+   「開始遊戲，進度到關卡中更佳」
+   「開始遊戲，進度到關卡中更佳」
+2. 在 Bizhawk 上方的選單點擊「Tools」->「Lua Console」，就會看到 Lua 小視窗
+3. 在 Lua 小視窗的選單點擊「Script」->「Open Script」
+4. 選擇下載回來的 Lua 檔「slash-senpai-x3.lua」
+5. ▶️ 表示成功打開，⏸️ 表示暫停
 
 Rockman X3 (Mega Man X3) for example:
-1. Open Bizhawk
+1. Make sure you are playing game
 2. Open rom and play game first
 3. After that, click 'Tools' -> 'Lua Console' to open Lua console
 4. In Lua console, click 'Script' -> 'Open Script'
 5. select 'slash-senpai-x3.lua'
 6. ▶️ mean open successful，⏸️ mean pause
 
-![Imgur](https://i.imgur.com/K6z2IzH.gif)
+![Imgur](https://i.imgur.com/QMSc6ug.gif)
 
 
 ------
