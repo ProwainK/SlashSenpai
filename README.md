@@ -215,10 +215,10 @@ to make more fun and challenge.
 
 ### 洛克人 Rockman X4 Boost
 
-GitHub 專案頁面
+GitHub 專案頁面  
 https://github.com/Appendko/RockmanX4Boost
 
-作者 Append 的 Twitch 頻道
+作者 Append 的 Twitch 頻道  
 https://www.twitch.tv/append
 
 由 Append 所製作的 PC & PS 洛克人 X4 - 敵加速 Mod，  
@@ -228,10 +228,10 @@ https://www.twitch.tv/append
 
 ### 超魔界村 Super Ghouls N Ghosts - Super Arthur
 
-Romhacking 改造相關資訊
+Romhacking 改造相關資訊  
 https://www.romhacking.net/hacks/2893/
 
-作者 Lufia 的相關資訊
+作者 Lufia 的相關資訊  
 https://www.romhacking.net/community/4012/
 
 由 Lufia 所製作的 SFC 超魔界村 - 亞瑟強化版 Rom Hack，  
