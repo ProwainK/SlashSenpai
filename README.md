@@ -118,8 +118,8 @@ Rockman X3 (Mega Man X3) for example:
 
 https://www.romhacking.net/patch/
 
-ROM file 欄位選擇 ROM 檔，
-Patch file 欄位選擇 IPS 檔，
+ROM file 欄位選擇 ROM 檔，  
+Patch file 欄位選擇 IPS 檔，  
 再按下 Apply patch 按鍵改造遊戲。
 
 
@@ -158,7 +158,7 @@ Issue (dont know how to fix)：
 - 惱人的被揍連段系統 / Annoying Combo System when get hit
 - 二段跳後可以接空衝 / Air Dash after Double Jump
 - 集氣相關貼圖 Bug / Graphic Glitch when Zero charged
-- [官方原版 Bug] 對練拳機使用億兆爆破機率卡死 Bug
+- [官方原版 Bug] 對練拳機使用億兆爆破機率卡死
 
 
 ------
@@ -221,8 +221,8 @@ https://github.com/Appendko/RockmanX4Boost
 作者 Append 的 Twitch 頻道
 https://www.twitch.tv/append
 
-由 Append 所製作的 PC & PS 洛克人 X4 - 敵加速 Mod，
-敵方雜魚和頭目在攻擊速度方面大幅增強，
+由 Append 所製作的 PC & PS 洛克人 X4 - 敵加速 Mod，  
+敵方雜魚和頭目在攻擊速度方面大幅增強，  
 今天的蜘蛛、沒有極限～！
 
 
@@ -234,8 +234,8 @@ https://www.romhacking.net/hacks/2893/
 作者 Lufia 的相關資訊
 https://www.romhacking.net/community/4012/
 
-由 Lufia 所製作的 SFC 超魔界村 - 亞瑟強化版 Rom Hack，
-除了主角亞瑟的武器連射解禁之餘，
+由 Lufia 所製作的 SFC 超魔界村 - 亞瑟強化版 Rom Hack，  
+除了主角亞瑟的武器連射解禁之餘，  
 另外還有受傷時盔甲降階、LR 切換武器等機體強化功能。
 
 
